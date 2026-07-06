@@ -10,14 +10,10 @@ def get_recent_commits(github_repo: str, days: int = 7) -> dict:
     github_repo format: 'owner/repo' e.g. 'langchain-ai/langchain'
     """
     headers = {}
-<<<<<<< HEAD
     github_token = os.getenv("GITHUB_TOKEN")
     if github_token:
         headers["Authorization"] = f"token {github_token}"
     elif GH_TOKEN:
-=======
-    if GH_TOKEN:
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
         headers["Authorization"] = f"Bearer {GH_TOKEN}"
 
     since = (datetime.utcnow() - timedelta(days=days)).isoformat() + "Z"
