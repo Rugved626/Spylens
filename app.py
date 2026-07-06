@@ -4,7 +4,7 @@ load_dotenv()
 from flask import Flask, render_template, jsonify, request, redirect, url_for, send_file
 =======
 from flask import Flask, render_template, jsonify, request, redirect, url_for
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
 from database import init_db, get_db
 from agent.runner import run_agent_for_competitor
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -37,7 +37,7 @@ def home():
 @app.route("/add_competitor", methods=["POST"])
 def add_competitor():
     name = request.form.get("name", "").strip()
-<<<<<<< HEAD
+     HEAD
 
     if not name:
         return jsonify({"error": "Company name is required"}), 400
