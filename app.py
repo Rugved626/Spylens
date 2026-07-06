@@ -1,25 +1,16 @@
-from dotenv import load_dotenv
-load_dotenv()
-<<<<<<< HEAD
-from flask import Flask, render_template, jsonify, request, redirect, url_for, send_file
-=======
-from flask import Flask, render_template, jsonify, request, redirect, url_for
-a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
-from database import init_db, get_db
-from agent.runner import run_agent_for_competitor
-from apscheduler.schedulers.background import BackgroundScheduler
-from agent.runner import run_all_competitors
-<<<<<<< HEAD
-from agent.discovery import discover_company
-from agent.intelligence_runner import run_full_analysis, get_status, get_latest_report
 import os
 import threading
-=======
-import os
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from flask import Flask, render_template, jsonify, request, redirect, url_for, send_file
+from database import init_db, get_db
+from agent.runner import run_agent_for_competitor, run_all_competitors
+from apscheduler.schedulers.background import BackgroundScheduler
+from agent.discovery import discover_company
+from agent.intelligence_runner import run_full_analysis, get_status, get_latest_report
+
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "spylens-secret")
@@ -34,10 +25,10 @@ def home():
     conn.close()
     return render_template("index.html", competitors=competitors)
 
+
 @app.route("/add_competitor", methods=["POST"])
 def add_competitor():
     name = request.form.get("name", "").strip()
-     HEAD
 
     if not name:
         return jsonify({"error": "Company name is required"}), 400
@@ -66,25 +57,11 @@ def add_competitor():
         1 if discovered.get("verified_website") else 0,
         1 if discovered.get("verified_github") else 0,
     ))
-=======
-    website_url = request.form.get("website_url", "").strip()
-    github_repo = request.form.get("github_repo", "").strip()
-
-    if not name:
-        return jsonify({"error": "Name is required"}), 400
-
-    conn = get_db()
-    c = conn.cursor()
-    c.execute(
-        "INSERT INTO competitors (name, website_url, github_repo) VALUES (?, ?, ?)",
-        (name, website_url, github_repo)
-    )
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+    
     conn.commit()
     conn.close()
     return redirect(url_for("home"))
 
-<<<<<<< HEAD
 
 @app.route("/api/discover", methods=["POST"])
 def api_discover():
@@ -98,8 +75,7 @@ def api_discover():
         return jsonify({"error": "Company name is required"}), 400
     return jsonify(discover_company(name))
 
-=======
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+
 @app.route("/delete_competitor/<int:comp_id>", methods=["POST"])
 def delete_competitor(comp_id):
     conn = get_db()
@@ -109,6 +85,7 @@ def delete_competitor(comp_id):
     conn.commit()
     conn.close()
     return redirect(url_for("home"))
+
 
 @app.route("/scan/<int:comp_id>", methods=["POST"])
 def scan_competitor(comp_id):
@@ -123,6 +100,7 @@ def scan_competitor(comp_id):
     summary = run_agent_for_competitor(dict(comp))
     return jsonify({"summary": summary})
 
+
 @app.route("/reports/<int:comp_id>")
 def get_reports(comp_id):
     conn = get_db()
@@ -133,6 +111,7 @@ def get_reports(comp_id):
     ).fetchall()
     conn.close()
     return jsonify([dict(r) for r in reports])
+
 
 @app.route("/api/stats")
 def stats():
@@ -146,7 +125,6 @@ def stats():
         "total_reports": total_reports
     })
 
-<<<<<<< HEAD
 
 # ---- Intelligence Pipeline ----
 # Full website + GitHub + AI competitive analysis + PDF report generation.
@@ -194,8 +172,7 @@ def download_report(comp_id):
         return jsonify({"error": "No PDF report available for this competitor yet"}), 404
     return send_file(report["pdf_path"], as_attachment=True)
 
-=======
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+
 # ---- Scheduler ----
 
 def start_scheduler():
@@ -209,6 +186,7 @@ def start_scheduler():
     )
     scheduler.start()
     print("Scheduler started — runs every Monday 9am")
+
 
 if __name__ == "__main__":
     init_db()
