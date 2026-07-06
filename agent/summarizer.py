@@ -1,23 +1,19 @@
 import os
+import json
 import requests
 from dotenv import load_dotenv
+
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def summarize_with_groq(competitor_name: str, github_data: dict, website_data: dict) -> str:
-<<<<<<< HEAD
     if not GROQ_API_KEY:
         commits_count = github_data.get("total_commits", 0) if isinstance(github_data, dict) else 0
         web_title = website_data.get("title", "N/A") if isinstance(website_data, dict) else "N/A"
         web_desc = website_data.get("meta_description", "N/A") if isinstance(website_data, dict) else "N/A"
         return f"## {competitor_name} — Weekly Intelligence Report\n\n### GitHub Activity\n- Total commits this week: {commits_count}\n- Signal: (AI analysis is unavailable; manual monitoring of repository recommended)\n\n### Website Changes\n- Current positioning: {web_title} - {web_desc}\n- Note: AI summarization is currently unconfigured."
 
-    import json
-=======
-    import json
-
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
     prompt = f"""
 You are a competitive intelligence analyst for Indian startups.
 
@@ -27,9 +23,9 @@ GITHUB DATA (last 7 days):
 {json.dumps(github_data, indent=2)}
 
 WEBSITE DATA:
-Title: {website_data.get('title', 'N/A')}
-Meta Description: {website_data.get('meta_description', 'N/A')}
-Content Preview: {website_data.get('content_preview', 'N/A')}
+Title: {website_data.get('title', 'N/A') if isinstance(website_data, dict) else 'N/A'}
+Meta Description: {website_data.get('meta_description', 'N/A') if isinstance(website_data, dict) else 'N/A'}
+Content Preview: {website_data.get('content_preview', 'N/A') if isinstance(website_data, dict) else 'N/A'}
 
 Write the digest in this exact format:
 
