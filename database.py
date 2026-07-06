@@ -4,7 +4,6 @@ import os
 DB_PATH = os.environ.get("DB_PATH", "spylens.db")
 
 def get_db():
-<<<<<<< HEAD
     conn = sqlite3.connect(DB_PATH, timeout=30.0)
     conn.row_factory = sqlite3.Row
     try:
@@ -12,10 +11,6 @@ def get_db():
         conn.execute("PRAGMA synchronous=NORMAL;")
     except Exception:
         pass
-=======
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
     return conn
 
 def init_db():
@@ -46,7 +41,6 @@ def init_db():
         )
     ''')
 
-<<<<<<< HEAD
     # company_discovery_cache table - caches auto-discovered company info
     # so repeated lookups for the same company name skip external API calls.
     c.execute('''
@@ -105,8 +99,6 @@ def init_db():
         if col_name not in existing_cols:
             c.execute(f"ALTER TABLE competitors ADD COLUMN {col_name} {col_type}")
 
-=======
->>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
     conn.commit()
     conn.close()
     print("DB initialized.")
