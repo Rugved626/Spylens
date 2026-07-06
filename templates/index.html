@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpyLens — Competitor Intelligence</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #e2e8f0; min-height: 100vh; }
+
+    header {
+      padding: 20px 40px;
+      border-bottom: 1px solid #1e2035;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 { font-size: 22px; font-weight: 600; color: #fff; }
+    header span { font-size: 13px; color: #64748b; }
+    .logo { font-size: 24px; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card {
+      background: #111827;
+      border: 1px solid #1e2035;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .stat-card .label { font-size: 12px; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-card .value { font-size: 28px; font-weight: 600; color: #6366f1; }
+
+    .section-title { font-size: 16px; font-weight: 600; color: #94a3b8; margin-bottom: 16px; }
+
+    .add-form {
+      background: #111827;
+      border: 1px solid #1e2035;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .add-form h2 { font-size: 15px; font-weight: 600; margin-bottom: 16px; color: #e2e8f0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+<<<<<<< HEAD
+    .form-row-simple { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: end; }
+    .discovery-hint { font-size: 12px; color: #475569; margin-top: 10px; }
+    .verified-badge { color: #34d399; font-size: 11px; margin-left: 4px; }
+    .unverified-badge { color: #f59e0b; font-size: 11px; margin-left: 4px; }
+    .competitor-logo { width: 28px; height: 28px; border-radius: 6px; object-fit: contain; background: #fff; margin-right: 8px; vertical-align: middle; }
+    .competitor-desc { font-size: 12px; color: #64748b; margin-bottom: 10px; line-height: 1.5; }
+=======
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+    .form-group label { font-size: 12px; color: #64748b; display: block; margin-bottom: 6px; }
+    .form-group input {
+      width: 100%;
+      background: #0a0a0f;
+      border: 1px solid #1e2035;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #e2e8f0;
+      font-size: 14px;
+      outline: none;
+    }
+    .form-group input:focus { border-color: #6366f1; }
+    .form-group input::placeholder { color: #334155; }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: #6366f1; color: #fff; }
+    .btn-scan { background: #0f766e; color: #fff; font-size: 12px; padding: 7px 14px; }
+    .btn-delete { background: #7f1d1d; color: #fca5a5; font-size: 12px; padding: 7px 14px; }
+
+    .competitors-grid { display: grid; gap: 16px; }
+    .competitor-card {
+      background: #111827;
+      border: 1px solid #1e2035;
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .competitor-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .competitor-name { font-size: 16px; font-weight: 600; color: #fff; }
+    .competitor-meta { font-size: 12px; color: #475569; margin-bottom: 16px; }
+    .competitor-meta a { color: #6366f1; text-decoration: none; }
+    .competitor-actions { display: flex; gap: 8px; }
+
+    .report-section { margin-top: 16px; display: none; }
+    .report-section.visible { display: block; }
+    .report-box {
+      background: #0a0a0f;
+      border: 1px solid #1e2035;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #94a3b8;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .scanning-msg { font-size: 13px; color: #6366f1; padding: 12px 0; }
+
+    .empty-state { text-align: center; padding: 60px 20px; color: #334155; }
+    .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+<<<<<<< HEAD
+
+    .btn-intel { background: #4c1d95; color: #e9d5ff; }
+
+    .intel-section { margin-top: 16px; display: none; }
+    .intel-section.visible { display: block; }
+    .intel-box {
+      background: #0a0a0f;
+      border: 1px solid #1e2035;
+      border-radius: 8px;
+      padding: 18px 20px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #94a3b8;
+    }
+    .intel-stage { font-size: 13px; color: #a78bfa; padding: 4px 0; }
+    .intel-stage .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #a78bfa; margin-right: 8px; animation: pulse 1.2s infinite ease-in-out; }
+    @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    .intel-h { font-size: 13px; font-weight: 700; color: #e2e8f0; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .intel-h:first-child { margin-top: 0; }
+    .rating-row { display: flex; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }
+    .rating-chip { background: #111827; border: 1px solid #1e2035; border-radius: 8px; padding: 10px 16px; min-width: 140px; }
+    .rating-chip .num { font-size: 22px; font-weight: 700; }
+    .rating-chip .lbl { font-size: 11px; color: #64748b; text-transform: uppercase; }
+    .rating-good { color: #34d399; }
+    .rating-mid { color: #f59e0b; }
+    .rating-bad { color: #f87171; }
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { background: #1e1b4b; color: #c4b5fd; font-size: 11px; padding: 3px 10px; border-radius: 999px; }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+    .swot-box { border-radius: 8px; padding: 10px 12px; font-size: 12px; }
+    .swot-s { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25); }
+    .swot-w { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25); }
+    .swot-o { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.25); }
+    .swot-t { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); }
+    .swot-box .swot-title { font-weight: 700; margin-bottom: 4px; }
+    .swot-s .swot-title { color: #34d399; }
+    .swot-w .swot-title { color: #f87171; }
+    .swot-o .swot-title { color: #818cf8; }
+    .swot-t .swot-title { color: #f59e0b; }
+    .swot-box ul { margin: 0; padding-left: 16px; }
+
+    .intel-list { margin: 0; padding-left: 18px; }
+    .pdf-link {
+      display: inline-block; margin-top: 14px; background: #6366f1; color: #fff;
+      text-decoration: none; padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    }
+    .pdf-link:hover { opacity: 0.85; }
+=======
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">🔍</span>
+  <h1>SpyLens</h1>
+  <span>Competitor Intelligence for Indian Startups</span>
+</header>
+
+<div class="container">
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="label">Competitors Tracked</div>
+      <div class="value" id="total-competitors">{{ competitors|length }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Reports Generated</div>
+      <div class="value" id="total-reports">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Next Auto-Scan</div>
+      <div class="value" style="font-size:16px; margin-top:6px;">Monday 9am</div>
+    </div>
+  </div>
+
+  <!-- Add Competitor Form -->
+  <div class="add-form">
+    <h2>+ Add Competitor</h2>
+<<<<<<< HEAD
+    <form method="POST" action="/add_competitor" id="add-competitor-form" onsubmit="return handleAddSubmit(this)">
+      <div class="form-row-simple">
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" name="name" placeholder="e.g. OpenAI" required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary" id="analyze-btn">Analyze</button>
+        </div>
+      </div>
+      <div class="discovery-hint" id="discovery-hint">
+        We'll auto-discover the official website, GitHub org, logo, description, LinkedIn and X — just give us the name.
+      </div>
+=======
+    <form method="POST" action="/add_competitor">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Competitor Name</label>
+          <input type="text" name="name" placeholder="e.g. Notion" required>
+        </div>
+        <div class="form-group">
+          <label>Website URL</label>
+          <input type="text" name="website_url" placeholder="https://notion.so">
+        </div>
+        <div class="form-group">
+          <label>GitHub Repo (owner/repo)</label>
+          <input type="text" name="github_repo" placeholder="e.g. langchain-ai/langchain">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+    </form>
+  </div>
+
+  <!-- Competitors List -->
+  <div class="section-title">Tracked Competitors</div>
+
+  {% if competitors %}
+  <div class="competitors-grid">
+    {% for comp in competitors %}
+    <div class="competitor-card">
+      <div class="competitor-header">
+<<<<<<< HEAD
+        <div class="competitor-name">
+          {% if comp.logo_url %}<img class="competitor-logo" src="{{ comp.logo_url }}" alt="" onerror="this.style.display='none'">{% endif %}
+          {{ comp.name }}
+        </div>
+        <div class="competitor-actions">
+          <button class="btn btn-intel" onclick="runFullAnalysis({{ comp.id }}, '{{ comp.name }}')">
+            🧠 Full Analysis
+          </button>
+=======
+        <div class="competitor-name">{{ comp.name }}</div>
+        <div class="competitor-actions">
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+          <button class="btn btn-scan" onclick="scanCompetitor({{ comp.id }}, '{{ comp.name }}')">
+            🔍 Scan Now
+          </button>
+          <form method="POST" action="/delete_competitor/{{ comp.id }}" style="display:inline">
+            <button type="submit" class="btn btn-delete">Delete</button>
+          </form>
+        </div>
+      </div>
+<<<<<<< HEAD
+
+      {% if comp.description %}
+      <div class="competitor-desc">{{ comp.description }}</div>
+      {% endif %}
+
+      <div class="competitor-meta">
+        {% if comp.website_url %}
+          <a href="{{ comp.website_url }}" target="_blank">🌐 {{ comp.website_url }}</a>
+          {% if comp.verified_website %}<span class="verified-badge">✓ verified</span>{% else %}<span class="unverified-badge">? unverified</span>{% endif %}
+        {% else %}
+          <span class="unverified-badge">No website discovered</span>
+        {% endif %}
+        {% if comp.github_repo %}
+          &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://github.com/{{ comp.github_repo }}" target="_blank">🐙 {{ comp.github_repo }}</a>
+          {% if comp.verified_github %}<span class="verified-badge">✓ verified</span>{% else %}<span class="unverified-badge">? unverified</span>{% endif %}
+        {% endif %}
+        {% if comp.linkedin_url %}&nbsp;&nbsp;|&nbsp;&nbsp; <a href="{{ comp.linkedin_url }}" target="_blank">in LinkedIn</a>{% endif %}
+        {% if comp.twitter_url %}&nbsp;&nbsp;|&nbsp;&nbsp; <a href="{{ comp.twitter_url }}" target="_blank">𝕏 Twitter</a>{% endif %}
+=======
+      <div class="competitor-meta">
+        {% if comp.website_url %}<a href="{{ comp.website_url }}" target="_blank">🌐 {{ comp.website_url }}</a>{% endif %}
+        {% if comp.github_repo %}&nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://github.com/{{ comp.github_repo }}" target="_blank">🐙 {{ comp.github_repo }}</a>{% endif %}
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+      </div>
+
+      <button class="btn btn-scan" onclick="loadReports({{ comp.id }})" style="background:#1e3a5f;">
+        📋 View Past Reports
+      </button>
+
+      <div class="report-section" id="report-{{ comp.id }}">
+        <div class="report-box" id="report-content-{{ comp.id }}"></div>
+      </div>
+<<<<<<< HEAD
+
+      <div class="intel-section" id="intel-{{ comp.id }}">
+        <div class="intel-box" id="intel-content-{{ comp.id }}"></div>
+      </div>
+=======
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="empty-state">
+    <div class="icon">🕵️</div>
+    <p>No competitors tracked yet.<br>Add your first competitor above to start scanning.</p>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+// Load stats
+fetch('/api/stats').then(r => r.json()).then(d => {
+  document.getElementById('total-reports').textContent = d.total_reports;
+});
+
+<<<<<<< HEAD
+function handleAddSubmit(form) {
+  const btn = document.getElementById('analyze-btn');
+  const hint = document.getElementById('discovery-hint');
+  btn.disabled = true;
+  btn.textContent = 'Analyzing…';
+  hint.textContent = '🔎 Discovering official website, GitHub org, logo, and socials — this can take up to ~15 seconds.';
+  return true; // allow the normal form POST to proceed
+}
+
+=======
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2
+function scanCompetitor(id, name) {
+  const reportDiv = document.getElementById('report-' + id);
+  const contentDiv = document.getElementById('report-content-' + id);
+  reportDiv.classList.add('visible');
+  contentDiv.textContent = '⏳ Scanning ' + name + '... this may take 20-30 seconds.';
+
+  fetch('/scan/' + id, { method: 'POST' })
+    .then(r => r.json())
+    .then(d => {
+      if (d.summary) {
+        contentDiv.textContent = d.summary;
+      } else if (d.error) {
+        contentDiv.textContent = '❌ Error: ' + d.error;
+      }
+    })
+    .catch(e => {
+      contentDiv.textContent = '❌ Network error: ' + e.message;
+    });
+}
+
+function loadReports(id) {
+  const reportDiv = document.getElementById('report-' + id);
+  const contentDiv = document.getElementById('report-content-' + id);
+  reportDiv.classList.add('visible');
+  contentDiv.textContent = 'Loading past reports...';
+
+  fetch('/reports/' + id)
+    .then(r => r.json())
+    .then(reports => {
+      if (reports.length === 0) {
+        contentDiv.textContent = 'No reports yet. Click Scan Now to generate one.';
+      } else {
+        contentDiv.textContent = reports.map(r =>
+          `📅 ${r.created_at}\n\n${r.summary}\n\n${'─'.repeat(60)}`
+        ).join('\n\n');
+      }
+    });
+}
+<<<<<<< HEAD
+
+// ---- Full Intelligence Pipeline ----
+
+function ratingClass(score) {
+  if (score === null || score === undefined) return '';
+  if (score >= 70) return 'rating-good';
+  if (score >= 40) return 'rating-mid';
+  return 'rating-bad';
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+
+function renderList(items) {
+  if (!items || items.length === 0) return '<ul class="intel-list"><li>No data available.</li></ul>';
+  return '<ul class="intel-list">' + items.map(i => `<li>${escapeHtml(i)}</li>`).join('') + '</ul>';
+}
+
+function renderChips(items) {
+  if (!items || items.length === 0) return '<span style="color:#475569">None detected</span>';
+  return '<div class="chip-row">' + items.map(i => `<span class="chip">${escapeHtml(i)}</span>`).join('') + '</div>';
+}
+
+function confidenceLabel(score) {
+  if (score === null || score === undefined) return 'Not Available';
+  return Math.round(score) + '%';
+}
+
+function confidenceClass(score) {
+  if (score === null || score === undefined) return '';
+  return ratingClass(score);
+}
+
+function sectionHeading(title, confidenceScore) {
+  return `<div class="intel-h" style="display:flex;justify-content:space-between;align-items:center;">
+    <span>${escapeHtml(title)}</span>
+    <span class="${confidenceClass(confidenceScore)}" style="font-size:12px;font-weight:700;text-transform:none;">${confidenceLabel(confidenceScore)}</span>
+  </div>`;
+}
+
+function renderDataSources(dataSources, overallConfidence) {
+  const order = (dataSources && dataSources.order) || [];
+  if (order.length === 0) return '';
+  const rows = order.map(([label, used]) =>
+    `<div style="display:flex;gap:8px;padding:2px 0;">
+      <span style="color:${used ? '#34d399' : '#f87171'};font-weight:700;">${used ? '✓' : '✗'}</span>
+      <span>${escapeHtml(label)}</span>
+    </div>`
+  ).join('');
+  return `<div class="intel-h">Data Sources</div>
+    <div style="margin-bottom:8px;">${rows}</div>
+    <div style="font-weight:700;" class="${confidenceClass(overallConfidence)}">Overall Confidence: ${confidenceLabel(overallConfidence)}</div>`;
+}
+
+function renderIntelResults(id, data) {
+  const contentDiv = document.getElementById('intel-content-' + id);
+  const ai = data.ai_data || {};
+  const gh = data.github_data || {};
+  const web = data.website_data || {};
+  const innovation = ai.innovation_score || {};
+  const overall = ai.overall_rating || {};
+  const swot = ai.swot || {};
+  const confidence = ai.confidence || {};
+
+  const languages = gh.available ? Object.keys(gh.languages || {}) : [];
+  const frameworks = gh.available ? (gh.frameworks || []) : [];
+  const webTech = web.available ? (web.tech_stack || []) : [];
+
+  let html = '';
+
+  if (ai.ai_generation_failed) {
+    html += `<div style="background:#3f2d0a;border:1px solid #78450c;border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:#fbbf24;">
+      ⚠️ ${escapeHtml(ai.ai_unavailable_message || 'AI analysis is temporarily unavailable. Rule-based intelligence has been used for this section.')}
+    </div>`;
+  }
+
+  html += renderDataSources(ai.data_sources, confidence.overall);
+
+  html += sectionHeading('Executive Summary', null);
+  html += `<div>${escapeHtml(ai.executive_summary || 'A summary could not be generated from available data at this time.')}</div>`;
+
+  html += `<div class="rating-row" style="margin-top:14px;">
+    <div class="rating-chip"><div class="num ${ratingClass(overall.score)}">${overall.score ?? '—'}/100</div><div class="lbl">Overall Rating</div></div>
+    <div class="rating-chip"><div class="num ${ratingClass(innovation.score)}">${innovation.score ?? '—'}/100</div><div class="lbl">Innovation Score</div></div>
+  </div>`;
+
+  html += `<div class="intel-h">Business Overview</div><div>${escapeHtml(ai.business_overview || 'Business model details could not be independently verified from public sources.')}</div>`;
+  html += `<div class="intel-h">Product Direction</div><div>${escapeHtml(ai.product_direction || 'Product direction could not be independently verified from public sources.')}</div>`;
+
+  html += sectionHeading('GitHub Analysis', confidence.github_analysis);
+  if (gh.available) {
+    html += `<div class="rating-row">
+      <div class="rating-chip"><div class="num">${(gh.stars ?? 0).toLocaleString()}</div><div class="lbl">Stars</div></div>
+      <div class="rating-chip"><div class="num">${(gh.forks ?? 0).toLocaleString()}</div><div class="lbl">Forks</div></div>
+      <div class="rating-chip"><div class="num">${(gh.watchers ?? 0).toLocaleString()}</div><div class="lbl">Watchers</div></div>
+    </div>
+    <div style="margin-top:8px;">${escapeHtml(ai.developer_ecosystem || ai.developer_activity || '')}</div>`;
+  } else {
+    // No empty section — show the Developer Ecosystem fallback explanation
+    // and continue the analysis using other public sources.
+    html += `<div style="margin-bottom:6px;">${escapeHtml(ai.no_github_explanation ||
+      'No verified public GitHub repository was found. This company may use private repositories or closed-source development.')}</div>`;
+    html += `<div style="color:#64748b;font-size:12px;margin-bottom:6px;">${escapeHtml(ai.public_source_disclaimer ||
+      'Since no verified public GitHub repository was available, the following insights are based on public customer reviews, industry trends, community discussions and official company information.')}</div>`;
+    html += `<div>${escapeHtml(ai.developer_ecosystem || ai.developer_activity || '')}</div>`;
+  }
+
+  html += sectionHeading('Market Intelligence', confidence.market_intelligence);
+  html += `<div>${escapeHtml(ai.market_position || 'Market position could not be independently verified from public sources.')}</div>`;
+
+  html += sectionHeading('Customer Sentiment', confidence.customer_sentiment);
+  html += `<div>${escapeHtml(ai.customer_sentiment || 'Customer sentiment could not be independently verified from public sources.')}</div>`;
+
+  html += `<div class="intel-h">Technology Stack</div>`;
+  html += `<div style="margin-bottom:6px;"><b style="color:#cbd5e1;">Languages:</b> ${renderChips(languages)}</div>`;
+  html += `<div style="margin-bottom:6px;"><b style="color:#cbd5e1;">Frameworks/Topics:</b> ${renderChips(frameworks)}</div>`;
+  html += `<div><b style="color:#cbd5e1;">Website Tech:</b> ${renderChips(webTech)}</div>`;
+
+  html += `<div class="intel-h">SWOT Analysis</div>`;
+  html += `<div class="swot-grid">
+    <div class="swot-box swot-s"><div class="swot-title">Strengths</div>${renderList(swot.strengths)}</div>
+    <div class="swot-box swot-w"><div class="swot-title">Weaknesses</div>${renderList(swot.weaknesses)}</div>
+    <div class="swot-box swot-o"><div class="swot-title">Opportunities</div>${renderList(swot.opportunities)}</div>
+    <div class="swot-box swot-t"><div class="swot-title">Threats</div>${renderList(swot.threats)}</div>
+  </div>`;
+
+  html += `<div class="intel-h">Hiring Trends</div><div>${escapeHtml(ai.hiring_trends || 'Hiring activity could not be independently verified from public sources.')}</div>`;
+  html += `<div class="intel-h">Recommendations</div>${renderList(ai.recommendations)}`;
+  html += sectionHeading('Future Predictions', confidence.predictions);
+  html += renderList(ai.future_predictions);
+
+  html += `<a class="pdf-link" href="/download_report/${id}" target="_blank">📄 Download Full PDF Report</a>`;
+
+  contentDiv.innerHTML = html;
+}
+
+
+function pollAnalysisStatus(id, name) {
+  const contentDiv = document.getElementById('intel-content-' + id);
+
+  const poll = setInterval(() => {
+    fetch('/analysis_status/' + id)
+      .then(r => r.json())
+      .then(status => {
+        if (status.error) {
+          clearInterval(poll);
+          contentDiv.innerHTML = `❌ Analysis failed: ${escapeHtml(status.error)}`;
+          return;
+        }
+        if (status.stage) {
+          contentDiv.innerHTML = `<div class="intel-stage"><span class="dot"></span>${escapeHtml(status.stage)}</div>`;
+        }
+        if (status.done) {
+          clearInterval(poll);
+          fetch('/analysis_result/' + id)
+            .then(r => r.json())
+            .then(data => renderIntelResults(id, data))
+            .catch(e => { contentDiv.textContent = '❌ Could not load results: ' + e.message; });
+        }
+      })
+      .catch(e => {
+        clearInterval(poll);
+        contentDiv.textContent = '❌ Network error while checking progress: ' + e.message;
+      });
+  }, 1200);
+}
+
+function runFullAnalysis(id, name) {
+  const intelDiv = document.getElementById('intel-' + id);
+  const contentDiv = document.getElementById('intel-content-' + id);
+  intelDiv.classList.add('visible');
+  contentDiv.innerHTML = '<div class="intel-stage"><span class="dot"></span>Finding Company...</div>';
+
+  fetch('/analyze/' + id, { method: 'POST' })
+    .then(r => r.json())
+    .then(d => {
+      if (d.error) {
+        contentDiv.textContent = '❌ Error: ' + d.error;
+        return;
+      }
+      pollAnalysisStatus(id, name);
+    })
+    .catch(e => {
+      contentDiv.textContent = '❌ Network error: ' + e.message;
+    });
+}
+</script>
+
+</body>
+</html>
+=======
+</script>
+
+</body>
+</html>
+>>>>>>> a5dd5cdc1f1b83663f80ea51989a0f0dfd9737b2

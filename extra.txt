@@ -1,0 +1,176 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[left=0.5in,right=0.5in,top=0.45in,bottom=0.45in]{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\pagestyle{empty}
+
+\titleformat{\section}
+{\large\bfseries}
+{}
+{0em}
+{}[\titlerule]
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Rugved Kulkarni}}[3pt]
+
+Kolhapur, Maharashtra, India\
+
+\href{mailto:connect[.to.rugved@gmail.com](mailto:.to.rugved@gmail.com)}{[connect.to.rugved@gmail.com](mailto:connect.to.rugved@gmail.com)}
+\quad | \quad
+\href{https://www.linkedin.com/in/rugved-kulkarni-9a4a812b5/}{LinkedIn}
+\quad | \quad
+\href{https://github.com/Rugved626}{GitHub}
+
+\end{center}
+
+\vspace{-0.3cm}
+
+\section*{Professional Summary}
+
+B.Tech student in Artificial Intelligence and Data Science at Government College of Engineering Kolhapur with experience building Agentic AI systems, Machine Learning applications, and full-stack software solutions. Skilled in Python, SQL, APIs, LLM integration, automation, and data analysis. Passionate about developing intelligent products that solve real-world business problems using AI.
+
+\section*{Education}
+
+\textbf{Government College of Engineering, Kolhapur}
+
+Bachelor of Technology (Artificial Intelligence & Data Science)
+
+Expected Graduation: 2027
+
+\section*{Technical Skills}
+
+\textbf{Programming Languages:}
+Python, SQL, HTML, CSS, JavaScript
+
+\textbf{AI & Machine Learning:}
+Machine Learning,
+Natural Language Processing,
+Agentic AI,
+Prompt Engineering,
+LLM Applications,
+Model Optimization
+
+\textbf{Frameworks & Libraries:}
+Flask,
+Streamlit,
+Scikit-Learn,
+Pandas,
+NumPy,
+BeautifulSoup
+
+\textbf{Databases:}
+MySQL,
+MongoDB,
+SQLite,
+PostgreSQL
+
+\textbf{Developer Tools:}
+Git,
+GitHub,
+Docker,
+GitHub Actions,
+Tableau Cloud
+
+\textbf{Core Computer Science:}
+Data Structures & Algorithms,
+Object-Oriented Programming,
+DBMS,
+Operating Systems,
+Computer Networks
+
+\section*{Projects}
+
+\textbf{SpyLens – Agentic AI Competitor Intelligence Platform}
+
+\textit{Python, Flask, Groq LLaMA 3, GitHub API, BeautifulSoup, SQLite, Docker}
+
+\begin{itemize}[leftmargin=*]
+\item Built an agentic AI platform that automatically monitors startup competitors through GitHub activity and website updates.
+\item Integrated GitHub REST APIs and web scraping pipelines to gather competitor intelligence data.
+\item Leveraged Groq LLaMA 3 models to generate actionable insights, opportunity reports, and weekly intelligence summaries.
+\item Automated monitoring workflows using APScheduler for continuous competitor tracking.
+\item Developed an interactive Flask dashboard with SQLite backend for competitor management and report visualization.
+\item Containerized and deployed the application using Docker.
+\item GitHub: \href{https://github.com/Rugved626/Spylens}{Repository}
+\item Live Demo: \href{https://spylens-8y7t.onrender.com/}{SpyLens Demo}
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{AI-Powered CI/CD Monitoring & Debugging System}
+
+\textit{Python, Flask, SQLite, GitHub Actions, LLM Integration}
+
+\begin{itemize}[leftmargin=*]
+\item Built an autonomous DevOps system using GitHub Actions and AI models to monitor software pipelines.
+\item Implemented AI-powered failure analysis to explain CI/CD errors in natural language.
+\item Automated GitHub issue creation for failed builds using AI-generated root-cause reports.
+\item Designed a live dashboard using Flask and SQLite to monitor pipeline health and debugging insights.
+\item GitHub: \href{https://github.com/Rugved626/ci-cd-demo}{Repository}
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{GCOEK Admission Assistant}
+
+\textit{Python, Flask, HTML, CSS, JavaScript, SQLite}
+
+\begin{itemize}[leftmargin=*]
+\item Developed a centralized admission guidance platform for prospective engineering students.
+\item Streamlined access to eligibility criteria, seat matrix, admission procedures, and college information.
+\item Built interactive navigation and search capabilities to improve student experience.
+\item Implemented dynamic content management using Flask and SQLite.
+\item Reduced information discovery time by consolidating admission resources into a single platform.
+\item GitHub: \href{https://github.com/Rugved626/gcoek-admission}{Repository}
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{Result Analysis & Certificate Generator System}
+
+\textit{HTML, JavaScript, XLSX.js}
+
+\begin{itemize}[leftmargin=*]
+\item Developed an automated result analysis and certificate generation platform for student academic records.
+\item Processed Excel datasets dynamically and generated university-style marksheets.
+\item Implemented student search, performance analytics, and subject-wise visualizations.
+\item Automated certificate creation and result reporting workflows.
+\end{itemize}
+
+\section*{Internship Experience}
+
+\textbf{Yuvaa Intern (Remote)}
+\hfill Jul 2025 -- Aug 2025
+
+\begin{itemize}[leftmargin=*]
+\item Collaborated with teams to analyze business challenges and propose technology-driven solutions.
+\item Organized reports, datasets, and documentation to support project execution.
+\item Participated in workshops and presented project learnings and findings.
+\item Explored emerging technologies to improve internal workflows and efficiency.
+\end{itemize}
+
+\section*{Achievements}
+
+\begin{itemize}[leftmargin=*]
+\item Built and deployed 4+ end-to-end AI and software engineering projects.
+\item Developed Agentic AI applications integrating LLMs, APIs, automation workflows, and web scraping.
+\item Actively practice Data Structures and Algorithms using Python and LeetCode.
+\end{itemize}
+
+\section*{Certifications}
+
+\begin{itemize}[leftmargin=*]
+\item Oracle Generative AI Professional Certification
+\item Deloitte Australia – Data Analytics Job Simulation
+\item Tata – GenAI Powered Data Analytics Job Simulation
+\item AWS – Solutions Architecture Job Simulation
+\item AWS Cloud Club GCOEK
+\end{itemize}
+
+\end{document}
